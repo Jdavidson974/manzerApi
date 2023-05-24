@@ -7,6 +7,10 @@ export class Repa {
     id: number;
     @Column()
     name: string
+    @Column()
+    tag: string
+    @Column()
+    img: string
     @ManyToOne(() => Utilisateur, (user) => user.repas)
     user: Utilisateur
 }

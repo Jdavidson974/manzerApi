@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UtilisateursModule } from './utilisateurs/utilisateurs.module';
 import { RepasModule } from './repas/repas.module';
 import { SecteursModule } from './secteurs/secteurs.module';
+import { Utilisateur } from './utilisateurs/entities/utilisateur.entity';
+import { Secteur } from './secteurs/entities/secteur.entity';
+import { Repa } from './repas/entities/repa.entity';
 
 
 @Module({
@@ -17,6 +20,7 @@ import { SecteursModule } from './secteurs/secteurs.module';
     password: process.env.DB_PASSWORD_PROD,
     database: process.env.DB_NAME_PROD,
     synchronize: true,
+    entities: [Utilisateur, Secteur, Repa]
   }), UtilisateursModule, RepasModule, SecteursModule],
   controllers: [AppController],
   providers: [AppService],
