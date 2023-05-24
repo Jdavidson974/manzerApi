@@ -9,9 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [SecteursController],
   providers: [SecteursService]
 })
-export class SecteursModule implements OnModuleInit {
-  constructor(private readonly secteurService: SecteursService) { }
-  onModuleInit() {
-    this.secteurService.initSecteur();
-  }
+export class SecteursModule {
+
+
 }

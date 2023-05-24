@@ -11,9 +11,6 @@ import { Secteur } from 'src/secteurs/entities/secteur.entity';
   controllers: [UtilisateursController],
   providers: [UtilisateursService]
 })
-export class UtilisateursModule implements OnModuleInit {
-  constructor(private readonly userService: UtilisateursService) { }
-  onModuleInit() {
-    this.userService.initUser();
-  }
+export class UtilisateursModule {
+
 }
