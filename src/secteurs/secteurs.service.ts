@@ -39,7 +39,7 @@ export class SecteursService {
   }
 
   findAll() {
-    return `This action returns all secteurs`;
+    return this.secteurRepo.find();
   }
 
   findOne(id: number) {

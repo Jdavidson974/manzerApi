@@ -31,8 +31,10 @@ export class AuthService {
                         // generer token + rediriger vers angular
                         this.login(user, res)
                     } else {
+                        console.log(req.user);
+
                         // user nexiste pas , rediriger vers la page d'inscription avec l'email fournis le nom et prenom 
-                        return res.redirect(`http://localhost:4200/?type=google&email=${req.user.email}&nom=${req.user.lastName}&prenom=${req.user.firstName}&photo=${req.user.picture}`);
+                        return res.redirect(`http://localhost:4200/register?&email=${req.user.email}&nom=${req.user.lastName}&prenom=${req.user.firstName}&photo=${req.user.picture}`);
                     }
                 }
             )
@@ -41,6 +43,6 @@ export class AuthService {
     async login(user: Utilisateur, @Res() res) {
         const payload = { email: user.email, sub: user.id, };
         const token = this.jwtService.sign(payload);
-        return res.redirect(`http://localhost:4200/auth?token=${token}`);
+        return res.redirect(`http://localhost:4200?token=${token}`);
     }
 }
