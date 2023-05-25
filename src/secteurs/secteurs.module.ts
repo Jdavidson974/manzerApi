@@ -10,6 +10,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   providers: [SecteursService]
 })
 export class SecteursModule {
-
-
 }

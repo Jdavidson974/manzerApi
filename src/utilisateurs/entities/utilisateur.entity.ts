@@ -13,6 +13,6 @@ export class Utilisateur {
     @OneToMany(() => Repa, (repas) => repas.user)
     repas: Repa[]
     @ManyToOne(() => Secteur, (secteur) => secteur.users)
-    @JoinTable()
-    secteurs: Secteur[]
+    secteur: Secteur
+
 }

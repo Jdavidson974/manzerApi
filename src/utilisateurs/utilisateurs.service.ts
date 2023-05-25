@@ -16,7 +16,7 @@ export class UtilisateursService {
   ) { }
 
   initUser() {
-    this.userRepo.find({ relations: { secteurs: true } }).then(users => {
+    this.userRepo.find({ relations: { secteur: true } }).then(users => {
       const tabInitUser = [
         { email: 'test1', username: 'toto974' },
         { email: 'test2', username: 'GouteAnous' },
