@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { RepasService } from './repas.service';
 import { CreateRepaDto } from './dto/create-repa.dto';
 import { UpdateRepaDto } from './dto/update-repa.dto';
 
 @Controller('repas')
 export class RepasController {
-  constructor(private readonly repasService: RepasService) {}
+  constructor(private readonly repasService: RepasService) { }
 
   @Post()
   create(@Body() createRepaDto: CreateRepaDto) {
@@ -15,6 +15,11 @@ export class RepasController {
   @Get()
   findAll() {
     return this.repasService.findAll();
+  }
+  @Get("my-repas")
+  getMyRepas(@Req() req) {
+    const id = req.user.userId;
+    return this.repasService.findAllMyRepas(+id);
   }
 
   @Get(':id')
