@@ -54,8 +54,8 @@ export class UtilisateursService {
     return `This action returns all utilisateurs`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} utilisateur`;
+  findOneByEmail(email: string) {
+    return this.userRepo.findOne({ where: { email: email } });
   }
 
   update(id: number, updateUtilisateurDto: UpdateUtilisateurDto) {

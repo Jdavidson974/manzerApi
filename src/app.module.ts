@@ -9,6 +9,7 @@ import { SecteursModule } from './secteurs/secteurs.module';
 import { Utilisateur } from './utilisateurs/entities/utilisateur.entity';
 import { Secteur } from './secteurs/entities/secteur.entity';
 import { Repa } from './repas/entities/repa.entity';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -21,7 +22,7 @@ import { Repa } from './repas/entities/repa.entity';
     database: process.env.DB_NAME_PROD,
     synchronize: true,
     entities: [Utilisateur, Secteur, Repa]
-  }), UtilisateursModule, RepasModule, SecteursModule],
+  }), UtilisateursModule, RepasModule, SecteursModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
