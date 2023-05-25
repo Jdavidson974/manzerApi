@@ -5,6 +5,7 @@ import { UtilisateursService } from 'src/utilisateurs/utilisateurs.service';
 
 @Injectable()
 export class AuthService {
+
     constructor(
         private usersService: UtilisateursService,
         private jwtService: JwtService,
@@ -41,8 +42,12 @@ export class AuthService {
         }
     }
     async login(user: Utilisateur, @Res() res) {
-        const payload = { email: user.email, sub: user.id, };
+        const payload = { email: user.email, sub: user.id, picture: user.picture };
         const token = this.jwtService.sign(payload);
         return res.redirect(`http://localhost:4200?token=${token}`);
+    }
+
+    getProfil(id: number) {
+        return this.usersService.getProfil(id);
     }
 }

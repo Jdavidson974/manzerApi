@@ -2,12 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UtilisateursService } from './utilisateurs.service';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
+import { Public } from 'src/shared/decorators/public.decorators';
 
 @Controller('utilisateurs')
 export class UtilisateursController {
   constructor(private readonly utilisateursService: UtilisateursService) { }
 
   @Post('create')
+  @Public()
   create(@Body() createUtilisateurDto: CreateUtilisateurDto) {
     return this.utilisateursService.create(createUtilisateurDto);
   }

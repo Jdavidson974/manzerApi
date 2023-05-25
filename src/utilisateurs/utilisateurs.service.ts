@@ -9,6 +9,7 @@ import { Secteur } from 'src/secteurs/entities/secteur.entity';
 
 @Injectable()
 export class UtilisateursService {
+
   constructor(
     @InjectRepository(Utilisateur) private userRepo: Repository<Utilisateur>,
     @InjectRepository(Repa) private repasRepo: Repository<Repa>,
@@ -74,5 +75,17 @@ export class UtilisateursService {
 
   remove(id: number) {
     return `This action removes a #${id} utilisateur`;
+  }
+
+  getProfil(id: number) {
+    return this.userRepo.findOneBy({ id: id, }).then(
+      user => {
+        if (user) {
+          return user;
+        } else {
+          throw new HttpException('user introuvable', HttpStatus.FORBIDDEN)
+        }
+      }
+    )
   }
 }
