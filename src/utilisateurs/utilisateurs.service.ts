@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
 import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -47,7 +47,17 @@ export class UtilisateursService {
 
   }
   create(createUtilisateurDto: CreateUtilisateurDto) {
-    return 'This action adds a new utilisateur';
+    return this.SecteurRepo.findOneBy({ id: createUtilisateurDto.secteurId }).then(
+      secteur => {
+        if (secteur) {
+          const user = this.userRepo.create({ email: createUtilisateurDto.email, username: createUtilisateurDto.username, picture: createUtilisateurDto.picture, secteur: secteur })
+          return this.userRepo.save(user);
+        } else {
+          throw new HttpException('secteur introuvable', HttpStatus.BAD_REQUEST)
+        }
+      }
+    )
+    // return 'This action adds a new utilisateur';
   }
 
   findAll() {

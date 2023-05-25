@@ -1,11 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { SecteursService } from './secteurs.service';
 import { CreateSecteurDto } from './dto/create-secteur.dto';
 import { UpdateSecteurDto } from './dto/update-secteur.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
+import { Public } from 'src/shared/decorators/public.decorators';
 
 @Controller('secteurs')
 export class SecteursController {
-  constructor(private readonly secteursService: SecteursService) {}
+  constructor(private readonly secteursService: SecteursService) { }
 
   @Post()
   create(@Body() createSecteurDto: CreateSecteurDto) {
@@ -13,6 +15,7 @@ export class SecteursController {
   }
 
   @Get()
+  @Public()
   findAll() {
     return this.secteursService.findAll();
   }
