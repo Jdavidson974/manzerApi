@@ -24,7 +24,7 @@ export class AuthService {
 
         if (!req.user) {
             // le compte n'existe pas chez google , redirection sur la page inscription.
-            return res.redirect(`http://localhost:4200`);
+            return res.redirect(process.env.PROD_APP_URL);
         } else {
             return this.usersService.findOneByEmail(email).then(
                 user => {
@@ -34,7 +34,7 @@ export class AuthService {
                     } else {
 
                         // user nexiste pas , rediriger vers la page d'inscription avec l'email fournis le nom et prenom 
-                        return res.redirect(`http://localhost:4200/register?&email=${req.user.email}&nom=${req.user.lastName}&prenom=${req.user.firstName}&photo=${req.user.picture}`);
+                        return res.redirect(`${process.env.PROD_APP_URL}/register?&email=${req.user.email}&nom=${req.user.lastName}&prenom=${req.user.firstName}&photo=${req.user.picture}`);
                     }
                 }
             )
@@ -43,7 +43,7 @@ export class AuthService {
     async login(user: Utilisateur, @Res() res) {
         const payload = { email: user.email, sub: user.id, picture: user.picture };
         const token = this.jwtService.sign(payload);
-        return res.redirect(`http://localhost:4200?token=${token}`);
+        return res.redirect(`${process.env.PROD_APP_URL}/?token=${token}`);
     }
 
     getProfil(id: number) {
