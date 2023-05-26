@@ -32,7 +32,6 @@ export class AuthService {
                         // generer token + rediriger vers angular
                         this.login(user, res)
                     } else {
-                        console.log(req.user);
 
                         // user nexiste pas , rediriger vers la page d'inscription avec l'email fournis le nom et prenom 
                         return res.redirect(`http://localhost:4200/register?&email=${req.user.email}&nom=${req.user.lastName}&prenom=${req.user.firstName}&photo=${req.user.picture}`);

@@ -1,1 +1,4 @@
-export class CreateRepaDto {}
+export class CreateRepaDto {
+    name: string;
+    tag: string;
+}

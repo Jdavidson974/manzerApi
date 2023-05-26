@@ -2,17 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/
 import { RepasService } from './repas.service';
 import { CreateRepaDto } from './dto/create-repa.dto';
 import { UpdateRepaDto } from './dto/update-repa.dto';
+import { Public } from 'src/shared/decorators/public.decorators';
 
 @Controller('repas')
 export class RepasController {
   constructor(private readonly repasService: RepasService) { }
 
-  @Post()
-  create(@Body() createRepaDto: CreateRepaDto) {
-    return this.repasService.create(createRepaDto);
-  }
-
   @Get()
+  @Public()
   findAll() {
     return this.repasService.findAll();
   }
@@ -27,13 +24,20 @@ export class RepasController {
     return this.repasService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRepaDto: UpdateRepaDto) {
+  @Post()
+  create(@Body() createRepaDto: CreateRepaDto, @Req() req) {
+    const id = req.user.userId
+    return this.repasService.create(createRepaDto, +id);
+  }
+  @Post("update")
+  update(@Body() updateRepaDto: UpdateRepaDto, @Req() req) {
+    const id = req.user.userId
     return this.repasService.update(+id, updateRepaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.repasService.remove(+id);
+  remove(@Param('id') id: string, @Req() req) {
+    const idUser = req.user.userId
+    return this.repasService.remove(+id, +idUser);
   }
 }
