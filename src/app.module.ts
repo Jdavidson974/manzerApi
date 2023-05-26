@@ -12,6 +12,8 @@ import { Repa } from './repas/entities/repa.entity';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth/jwt-auth.guard';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 
 @Module({
@@ -24,7 +26,16 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth/jwt-auth.guard';
     database: process.env.DB_NAME_PROD,
     synchronize: true,
     entities: [Utilisateur, Secteur, Repa]
-  }), UtilisateursModule, RepasModule, SecteursModule, AuthModule],
+  }),
+    UtilisateursModule,
+    RepasModule,
+    SecteursModule,
+    AuthModule,
+  ServeStaticModule.forRoot({
+    rootPath: join(__dirname, '..', 'client'),
+  }),
+
+  ],
   controllers: [AppController],
   providers: [
     AppService,
