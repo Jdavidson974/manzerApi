@@ -10,7 +10,7 @@ export class Utilisateur {
     username: string
     @Column()
     email: string
-    @Column("long raw", { nullable: true })
+    @Column({ nullable: true })
     picture: string
     @OneToMany(() => Repa, (repas) => repas.user)
     repas: Repa[]
