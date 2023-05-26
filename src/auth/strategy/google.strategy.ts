@@ -9,7 +9,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google_login') {
         super({
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_SECRET,
-            callbackURL: 'http://localhost:3000/auth/login-google',
+            callbackURL: 'https://manzer-api-jdavidson974.vercel.app/auth/login-google',
             scope: ['email', 'profile',],
         });
     }
